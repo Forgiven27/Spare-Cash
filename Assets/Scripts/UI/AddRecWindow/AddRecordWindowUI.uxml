@@ -1,0 +1,32 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/UI/USS/headWin.uss?fileID=7433441132597879392&amp;guid=54d18fe20b835534ba6280394434942f&amp;type=3#headWin" />
+    <Style src="project://database/Assets/Scripts/UI/USS/bodyWin.uss?fileID=7433441132597879392&amp;guid=6239c5bba0ac7e449afd725289a82b7b&amp;type=3#bodyWin" />
+    <Style src="project://database/Assets/Scripts/UI/USS/dropDown.uss?fileID=7433441132597879392&amp;guid=cd1af87e3184da4438a6f8b4e27debae&amp;type=3#dropDown" />
+    <Style src="project://database/Assets/Scripts/UI/USS/buttonsStandart.uss?fileID=7433441132597879392&amp;guid=a7fb0fe5a06047b4c9efba47bd1514c3&amp;type=3#buttonsStandart" />
+    <Style src="project://database/Assets/Scripts/UI/USS/deleteHover.uss?fileID=7433441132597879392&amp;guid=99bd6435972a4334c98cc054c5166dfd&amp;type=3#deleteHover" />
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:VisualElement name="main_container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.43); align-items: stretch;">
+            <ui:VisualElement name="HeadWin" class="headWin" style="flex-grow: 1; background-color: rgb(137, 230, 137); justify-content: space-around; align-items: center; flex-direction: row;">
+                <ui:Label tabindex="-1" text="Добавление записи" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HeadName" />
+            </ui:VisualElement>
+            <ui:VisualElement name="BodyWin" class="bodyWin" style="flex-grow: 8; background-color: rgb(223, 250, 233); justify-content: space-around;">
+                <ui:VisualElement name="InputField" style="flex-grow: 1; align-items: flex-start; justify-content: flex-start;">
+                    <ui:VisualElement name="SummField" style="align-items: stretch; justify-content: flex-start; align-self: center; width: 100%;">
+                        <ui:Label tabindex="-1" text="Сумма" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SummLabel" />
+                        <ui:UnsignedIntegerField name="Summ" />
+                    </ui:VisualElement>
+                    <ui:Toggle label="Доход" name="Income" />
+                    <ui:VisualElement name="DateField" style="align-items: stretch; align-self: stretch;">
+                        <ui:Label tabindex="-1" text="Дата" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DateLabel" />
+                        <ui:DropdownField name="EasyDate" class="custom-dropdown" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="CategoriesField" style="align-items: stretch; align-self: stretch;">
+                        <ui:Label tabindex="-1" text="Категории" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CategoriesLabel" />
+                        <ui:DropdownField name="CategoriesDropdown" class="custom-dropdown" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:Button text="Добавить запись" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AddRecButton" style="border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; -unity-text-align: middle-center; white-space: nowrap; text-overflow: clip;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

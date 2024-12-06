@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/UI/USS/buttonsStandart.uss?fileID=7433441132597879392&amp;guid=a7fb0fe5a06047b4c9efba47bd1514c3&amp;type=3#buttonsStandart" />
+    <ui:VisualElement name="main_container" style="flex-grow: 1;">
+        <ui:VisualElement name="Head" style="flex-grow: 1; background-color: rgb(137, 230, 137);" />
+        <ui:VisualElement name="Body" style="flex-grow: 9; background-color: rgb(223, 250, 233);">
+            <ui:Button text="Метод среднего значения" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Graph1" />
+            <ui:Button text="Экспоненциальное сглаживание" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Graph2" />
+            <ui:Button text="ARIMA" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Graph3" style="-unity-font-style: bold;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

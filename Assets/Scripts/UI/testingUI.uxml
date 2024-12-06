@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:VisualElement name="Container" style="flex-grow: 1; flex-direction: column; padding-top: 22px; padding-right: 22px; padding-bottom: 22px; padding-left: 22px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; align-self: stretch; justify-content: center; align-items: stretch;">
+            <ui:DropdownField label="Месяцы" name="DropdownField" style="margin-bottom: 4px; justify-content: flex-start;" />
+            <ui:VisualElement style="flex-grow: 1; height: 173px;" />
+            <ui:IntegerField label="Сумма" value="42" name="Summa" />
+            <ui:IntegerField label="Доход/Расход" value="42" name="Income" />
+            <ui:DropdownField label="Категория" name="Dropdown_cat" />
+            <ui:DropdownField label="Счет" name="Dropdown_acc" />
+            <ui:Button text="Поворот" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button" style="flex-direction: column;" />
+            <ui:VisualElement name="VisualElement" style="flex-grow: 1; height: 0; flex-direction: row; align-items: center; flex-wrap: nowrap; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; justify-content: space-around; align-self: stretch; flex-basis: 0; opacity: 1; flex-shrink: 1; transform-origin: bottom; translate: 0 0; scale: 1 1;">
+                <ui:Button text="Увеличение" parse-escape-sequences="true" display-tooltip-when-elided="true" name="In" />
+                <ui:Button text="Уменьшение" parse-escape-sequences="true" display-tooltip-when-elided="true" name="De" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

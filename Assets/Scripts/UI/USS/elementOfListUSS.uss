@@ -1,0 +1,43 @@
+.list-item {
+    
+    flex-direction: row;
+    justify-content: space-between;
+    
+    transition: background-color 0.2s ease;
+    
+}
+/*
+.list-item:hover {
+    background-color: rgb(224, 0, 224);
+    justify-content: flex-end;
+}
+.elementsOfList:hover{
+    justify-content: flex-end;
+    background-color: rgb(0, 255, 0);
+}*/
+.circle {
+    width: 18px;
+    height: 18px;
+    margin-left: 10%;
+    border-radius: 50%;
+    
+    background-color: rgb(0, 123, 255);
+}
+
+.logo {
+    width: 30px;
+    height: 30px;
+}
+
+.text {
+    margin: 0;
+    /*margin-left: 10px;
+    */
+    font-size: 80%;
+    
+    align-items: flex-start;
+}
+
+.value {
+    margin-right: 10%;
+}

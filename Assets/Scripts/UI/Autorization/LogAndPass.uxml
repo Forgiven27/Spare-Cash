@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/UI/USS/deleteHover.uss?fileID=7433441132597879392&amp;guid=99bd6435972a4334c98cc054c5166dfd&amp;type=3#deleteHover" />
+    <ui:VisualElement name="main_container" style="flex-grow: 1;">
+        <ui:VisualElement name="around" style="flex-grow: 1; border-left-color: rgb(137, 230, 137); border-right-color: rgb(137, 230, 137); border-top-color: rgb(137, 230, 137); border-bottom-color: rgb(137, 230, 137); border-top-width: 39px; border-right-width: 39px; border-bottom-width: 39px; border-left-width: 39px; background-color: rgb(255, 255, 255);">
+            <ui:Label tabindex="-1" text="/\Spare Cash /\" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HeadLabel" style="align-self: center; font-size: 26%; -unity-font-style: bold; -unity-font: initial; -unity-text-outline-color: rgb(0, 248, 147); -unity-text-outline-width: 1px; text-shadow: 1.3px 0.9px 2.4px rgb(0, 186, 255);" />
+            <ui:VisualElement name="LoginBox" style="flex-grow: 1; justify-content: flex-end;">
+                <ui:Label tabindex="-1" text="Логин:" parse-escape-sequences="true" display-tooltip-when-elided="true" name="LoginLabel" />
+                <ui:TextField picking-mode="Ignore" value="test" name="LoginTextField" class="text_field" />
+            </ui:VisualElement>
+            <ui:VisualElement name="PasswordBox" style="flex-grow: 1;">
+                <ui:Label tabindex="-1" text="Пароль:" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PasswordLabel" />
+                <ui:TextField picking-mode="Ignore" value="****" name="PasswordTextField" class="text_field" />
+            </ui:VisualElement>
+            <ui:Button text="Вход" parse-escape-sequences="true" display-tooltip-when-elided="true" style="border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); background-color: rgb(177, 229, 169); border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; margin-bottom: 30px; color: rgb(0, 0, 0);" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

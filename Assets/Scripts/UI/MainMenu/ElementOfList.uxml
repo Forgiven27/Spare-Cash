@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/UI/USS/elementOfListUSS.uss?fileID=7433441132597879392&amp;guid=c4bdcabf2bb94cd4da7b7a17551f3604&amp;type=3#elementOfListUSS" />
+    <ui:VisualElement class="list-item elementOfList">
+        <ui:VisualElement name="circle" class="circle elementOfList">
+            <ui:Image name="logo" class="logo elementOfList" />
+        </ui:VisualElement>
+        <ui:Label name="text" class="text elementOfList" />
+        <ui:Label name="value" class="text value elementOfList" />
+    </ui:VisualElement>
+</ui:UXML>

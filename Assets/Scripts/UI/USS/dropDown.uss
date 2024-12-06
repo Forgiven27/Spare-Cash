@@ -1,0 +1,46 @@
+/* Стили для Dropdown */
+.custom-dropdown {
+    
+    border-radius: 5px; /* Скругление углов */
+    background-color: #A3BCF2; /* Цвет фона */
+    color: black; /* Цвет текста */
+}
+
+/* Стили для выпадающего списка */
+.custom-dropdown__popup {
+    max-height: 200px; /* Максимальная высота выпадающего списка */
+    overflow: hidden; /* Скрываем скролл */
+    border-radius: 5px; /* Скругление углов */
+    background-color: #A3BCF2; /* Цвет фона */
+    color: black; /* Цвет текста */
+}
+
+/* Стили для элементов выпадающего списка */
+.custom-dropdown__popup .unity-base-popup-field__list-view .unity-base-popup-field__list-item {
+    
+    background-color: #A3BCF2; /* Цвет фона элементов списка */
+    color: green; 
+}
+
+/* Стили для выбранного элемента */
+.custom-dropdown__popup .unity-base-popup-field__list-view .unity-base-popup-field__list-item:checked {
+    background-color: #3E8E41; 
+    color: red; 
+}
+/*
+.unity-base-popup-field  {
+    background-color: #000000;
+    color: red; 
+}*/
+/*
+.unity-popup-field  {
+    background-color: #ffffff;
+    color: green;
+}*/
+
+
+
+.unity-popup-field__input{
+    background-color: rgb(163,188,242); 
+    color: black;     
+}

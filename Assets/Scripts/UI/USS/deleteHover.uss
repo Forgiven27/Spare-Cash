@@ -1,0 +1,18 @@
+/*
+.unity-base-field__input{
+	background-color: grey;
+	margin: 90px;
+	padding: 90px;
+}
+.unity-base-text-field__input{
+	background-color: brown;
+	margin: 50px;
+	padding: 50px;
+}*/
+.unity-base-text-field__input--single-line{
+	background-color: skyblue;
+	margin: 0px;
+	padding: 10px;
+	border-radius:10px;
+	color:black;
+}
