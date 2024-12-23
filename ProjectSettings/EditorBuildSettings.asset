@@ -9,14 +9,26 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+    path: Assets/Scenes/Autorization.unity
+    guid: a0d194beb78e5cf4e891bf9342dc71a0
+  - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 3fc8acdd13e6c734bafef6554d6fdbcd
   - enabled: 1
     path: Assets/Scenes/AddRecScene.unity
     guid: b2d254a5ea2a06049b713a6f705abbe6
   - enabled: 1
-    path: Assets/Scenes/GraphScene.unity
+    path: Assets/Scenes/AverageGraphScene.unity
     guid: 6e5913712eaa72044b3229a689e76547
+  - enabled: 1
+    path: Assets/Scenes/ChooseGraph.unity
+    guid: 5f4f398c572a2d84aa9563367771a04d
+  - enabled: 1
+    path: Assets/Scenes/AddCatScene.unity
+    guid: bfd3fa86417ce2444ab931ae85db8baa
+  - enabled: 1
+    path: Assets/Scenes/AboutDevScene.unity
+    guid: 95f1db16faaad1f4cb504ae4caae412d
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 26e16616db868464e88ab0841e67f14e, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: a0c7566aeded3904ea52c9103ced9d71, type: 2}

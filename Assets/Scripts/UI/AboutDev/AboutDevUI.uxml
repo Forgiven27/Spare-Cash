@@ -1,0 +1,30 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/UI/USS/photoDevs.uss?fileID=7433441132597879392&amp;guid=a3ba90b4b631f90419f27ca4da33f18f&amp;type=3#photoDevs" />
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:VisualElement name="main-container" style="flex-grow: 1;">
+            <ui:VisualElement name="Head" style="flex-grow: 3; background-color: rgb(137, 230, 137); justify-content: center;">
+                <ui:Label tabindex="-1" text="О разработчиках" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HeadText" style="-unity-text-align: middle-center;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Body" style="flex-grow: 8;">
+                <ui:VisualElement name="Designers" style="flex-grow: 1;">
+                    <ui:Label tabindex="-1" text="Дизайнеры" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HeadDes" />
+                    <ui:VisualElement name="KateField" style="flex-grow: 1; flex-direction: row;">
+                        <ui:Label tabindex="-1" text="Разработал концепцию визуального стиля проекта, включая логотип и рекламные материалы. " parse-escape-sequences="true" display-tooltip-when-elided="true" name="Kate" class="description" style="white-space: normal;" />
+                        <ui:VisualElement name="photo1" class="photo" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Scripts/UI/AboutDev/photo_2024-12-22_22-35-26.jpg?fileID=2800000&amp;guid=9277bd6f2b475da4e862ff0fb71eb477&amp;type=3#photo_2024-12-22_22-35-26&quot;); -unity-background-scale-mode: scale-to-fit;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="DaryaField" style="flex-grow: 1; flex-direction: row;">
+                        <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Darya" text="Отвечал за проектирование пользовательского интерфейса, создавая макеты и прототипы для обеспечения интуитивного взаимодействия " class="description" style="white-space: normal;" />
+                        <ui:VisualElement name="photo2" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Scripts/UI/AboutDev/IMG_0251.png?fileID=2800000&amp;guid=9e5e173a179ee594ea35202876736b33&amp;type=3#IMG_0251&quot;); -unity-background-scale-mode: scale-to-fit;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="Developers" style="flex-grow: 1;">
+                    <ui:Label tabindex="-1" text="Разработчики" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HeadDev" />
+                    <ui:VisualElement name="MichaelField" style="flex-grow: 1; flex-direction: row;">
+                        <ui:Label tabindex="-1" text="занимался созданием функционала приложения, включая разработку основных модулей на Unity и интеграцию базы данных SQLite." parse-escape-sequences="true" display-tooltip-when-elided="true" name="Michael" class="description" style="white-space: normal;" />
+                        <ui:VisualElement name="photo3" class="photo" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Scripts/UI/AboutDev/photo_2024-12-22_22-36-39.jpg?fileID=2800000&amp;guid=5b4ce14f92b875c4299185c525534638&amp;type=3#photo_2024-12-22_22-36-39&quot;); -unity-background-scale-mode: scale-to-fit; height: 109px;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

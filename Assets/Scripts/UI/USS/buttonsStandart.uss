@@ -1,7 +1,9 @@
 .unity-button{
 	margin-top:5px;
-	border-radius:10px;
 	color:black;
+	border-width:1.5px;
+	border-radius:10px;
+	border-color: rgb(36,110,195);
 	background-color: rgb(163,188,242);
 	/*background-color; A3BCF2;*/
 }

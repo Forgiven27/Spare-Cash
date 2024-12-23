@@ -36,14 +36,14 @@ public class TransitonToGraph : MonoBehaviour
                 Debug.Log("Swipe Right");
                 label.text = "Swipe Right";
                 // Добавьте здесь вашу логику для свайпа вправо
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene("ChooseGraph");
             }
             else
             {
                 Debug.Log("Swipe Left");
                 label.text = "Swipe Left";
                 // Добавьте здесь вашу логику для свайпа влево
-                SceneManager.LoadScene(1);
+                SceneManager.LoadScene("AddRecScene");
             }
         }
         else

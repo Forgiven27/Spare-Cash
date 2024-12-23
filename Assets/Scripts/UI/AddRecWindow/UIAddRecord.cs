@@ -7,10 +7,29 @@ using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 using System;
+using Unity.VisualScripting;
 
 public class UIAddRecord : MonoBehaviour
 {
-    [SerializeField] GameObject mainMenuUI;
+    UnityEngine.UIElements.Label labelHead;
+    UnityEngine.UIElements.Button buttonAddRecord;  
+    UnityEngine.UIElements.UnsignedIntegerField summField;
+    UnityEngine.UIElements.Toggle toggleIncome;
+    UnityEngine.UIElements.DropdownField dropdownDay;
+    UnityEngine.UIElements.DropdownField dropdownMonth;
+    UnityEngine.UIElements.DropdownField dropdownYear;
+    UnityEngine.UIElements.DropdownField dropdownCategory;
+    UnityEngine.UIElements.Button buttonToAddCatScene;
+    UserDB userDB;
+    AccountDB accountDB;
+    CategoryDB categoryDB;
+    RecordDB recordDB;
+
+    List<string> monthsEnum = new List<string>()
+    {
+        "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"
+    };
+    int currentYear;
     
     void Awake()
     {
@@ -22,28 +41,46 @@ public class UIAddRecord : MonoBehaviour
             Debug.LogError("Root VisualElement not found!");
             return;
         }
-        UnityEngine.UIElements.Label labelHead = root.Q<UnityEngine.UIElements.Label>("HeadName");
-        UnityEngine.UIElements.Button buttonAddRecord = root.Q<UnityEngine.UIElements.Button>("AddRecButton");
-        UnityEngine.UIElements.UnsignedIntegerField summField = root.Q<UnityEngine.UIElements.UnsignedIntegerField>("Summ");
-        UnityEngine.UIElements.Toggle toggleIncome = root.Q<UnityEngine.UIElements.Toggle>("Income");
-        UnityEngine.UIElements.DropdownField dropdownDate = root.Q<UnityEngine.UIElements.DropdownField>("EasyDate");
-        UnityEngine.UIElements.DropdownField dropdownCategory = root.Q<UnityEngine.UIElements.DropdownField>("CategoriesDropdown");
+        // Инициализация элементов UI Toolkit
+        labelHead = root.Q<UnityEngine.UIElements.Label>("HeadName");
+        buttonAddRecord = root.Q<UnityEngine.UIElements.Button>("AddRecButton");
+        summField = root.Q<UnityEngine.UIElements.UnsignedIntegerField>("Summ");
+        toggleIncome = root.Q<UnityEngine.UIElements.Toggle>("Income");
+        dropdownDay = root.Q<UnityEngine.UIElements.DropdownField>("DayDateField");
+        dropdownMonth = root.Q<UnityEngine.UIElements.DropdownField>("MonthDateField");
+        dropdownYear = root.Q<UnityEngine.UIElements.DropdownField>("YearDateField");
+        dropdownCategory = root.Q<UnityEngine.UIElements.DropdownField>("CategoriesDropdown");
+        buttonToAddCatScene = root.Q<UnityEngine.UIElements.Button>("AddCat");
         
-
-
+        // Добавление статический подписей 
         labelHead.text = "Добавление записи";
-        
         toggleIncome.label = "Это доход?";
-        
         buttonAddRecord.text = "Добавить запись";
 
-        dropdownDate.choices = new List<string> { "Сегодня", "Вчера", "Позавчера" };
 
-        UserDB userDB = new UserDB();
-        AccountDB accountDB = new AccountDB(userDB);
-        CategoryDB categoryDB = new CategoryDB(userDB);
+        DateTime currentDateTime = DateTime.Now;
+        currentYear = currentDateTime.Year;
+        dropdownDay.choices = CountDaysInMonth(currentDateTime.Month, currentYear);
+        dropdownMonth.choices = ShiftList(currentDateTime.Month.ToString(), monthsEnum);    
+        dropdownYear.choices = new List<string>()
+        {
+            currentYear.ToString(),
+            (currentYear - 1).ToString(),
+            (currentYear - 2).ToString(),
+            (currentYear - 3).ToString(),
+            (currentYear - 4).ToString(),
+            (currentYear - 5).ToString()
+        };
+        dropdownDay.value = currentDateTime.Day.ToString();
+        dropdownMonth.value = currentDateTime.Month.ToString();
+        dropdownYear.value = currentYear.ToString();
 
-        List<List<string>> listCat = categoryDB.GetCategoryData();
+        userDB = new UserDB();
+        accountDB = new AccountDB(userDB);
+        categoryDB = new CategoryDB(userDB);
+        recordDB = new RecordDB(categoryDB, accountDB, userDB);
+
+        List<List<string>> listCat = categoryDB.GetUserCategoryData(UserInfo.UserID);
 
         List<string> categories = new List<string>();
 
@@ -62,7 +99,9 @@ public class UIAddRecord : MonoBehaviour
 
 
         buttonAddRecord.clicked += buttonAddClicked;
-        
+        buttonToAddCatScene.clicked += buttonToAddCatSceneClicked;
+
+
     }
 
     private void Update()
@@ -79,30 +118,26 @@ public class UIAddRecord : MonoBehaviour
         bool answer = AddRecord();
         if (answer)
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene("MainScene");
         }
     }
+    void buttonToAddCatSceneClicked()
+    {
+        SceneManager.LoadScene("AddCatScene");
+    }
+
     private void OnBackButtonPressed()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("MainScene");
     }
 
     private bool AddRecord()
     {
         bool flag = true;
 
-        var root = GetComponent<UIDocument>().rootVisualElement;
-        
-        UnityEngine.UIElements.UnsignedIntegerField summField = root.Q<UnityEngine.UIElements.UnsignedIntegerField>("Summ");
-        UnityEngine.UIElements.Toggle toggleIncome = root.Q<UnityEngine.UIElements.Toggle>("Income");
-        UnityEngine.UIElements.DropdownField dropdownDate = root.Q<UnityEngine.UIElements.DropdownField>("EasyDate");
-        UnityEngine.UIElements.DropdownField dropdownCategory = root.Q<UnityEngine.UIElements.DropdownField>("CategoriesDropdown");
-
         if (summField.value != 0)
         {
-            UserDB userDB = new UserDB();
-            AccountDB accountDB = new AccountDB(userDB);
-            RecordDB recordDB = new RecordDB(new CategoryDB(userDB), accountDB, userDB);
+            
             int id = recordDB.CountOfRows() + 1;
             int summa = Convert.ToInt32(summField.value);
             int income = 0;
@@ -110,20 +145,14 @@ public class UIAddRecord : MonoBehaviour
             {
                 income = 1;
             }
-            string date = DateTime.Today.ToString("u"); ;
-            switch (dropdownDate.value)
-            {
-                case "Сегодня":
-                    date = DateTime.Today.ToString("u");
-                    break;
-                case "Вчера":
-                    date = DateTime.Today.AddDays(-1).ToString("u");
-                    break;
-                case "Позавчера":
-                    date = DateTime.Today.AddDays(-2).ToString("u");
-                    break;
-            }
-            int id_cat = dropdownCategory.choices.IndexOf(dropdownCategory.value) + 1;
+
+            int day = Convert.ToInt32(dropdownDay.value);
+            int month = Convert.ToInt32(dropdownMonth.value);
+            int year = Convert.ToInt32(dropdownYear.value);
+            string date = new DateTime(year, month, day).ToString("dd-MM-yyyy"); ;
+
+            
+            int id_cat = dropdownCategory.choices.IndexOf(dropdownCategory.value);
             int id_acc = 1;
             int id_user = UserInfo.UserID;
             recordDB.addData(new RecordEntity(id, summa, income, date, id_cat, id_acc, id_user));
@@ -136,65 +165,36 @@ public class UIAddRecord : MonoBehaviour
         return flag;
     }
 
-    /*
-    public void SetActiveUI()
+    List<string> CountDaysInMonth(int month, int year)
     {
-        var root = GetComponent<UIDocument>().rootVisualElement;
-        
-        // UnityEngine.UIElements.VisualElement mainContainer = root.Q<UnityEngine.UIElements.VisualElement>("main-container");
-        UnityEngine.UIElements.Button buttonAddRecord = root.Q<UnityEngine.UIElements.Button>("AddRecButton");
-        UnityEngine.UIElements.TextField summField = root.Q<UnityEngine.UIElements.TextField>("Summ");
-        UnityEngine.UIElements.DropdownField catDropdown = root.Q<UnityEngine.UIElements.DropdownField>("CategoriesDropdown");
-
-        
-
-        if (root.visible == true)
+        List<string> days = new List<string>();
+        int countDays = DateTime.DaysInMonth(year, month);
+        for (int i = 1;i <= countDays; i++)
         {
-            Debug.Log("TRUE");
-            root.visible = true;
-            //buttonAddRecord.visible = true;
-            //summField.visible = true;
-            //catDropdown.visible = true;
+            days.Add(i.ToString());
         }
-        else
-        {
-            Debug.Log("FALSE");
-            root.visible = true;
-            //buttonAddRecord.visible = false;
-            //summField.visible = false;
-            //catDropdown.visible = false;
-        }
-    }*/
-    
-    public void TestPlus()
-    {
-        SetActiveUI(false);
+        return days;
     }
-    
-    public void SetActiveUI(bool flag)
+
+    List<string> ShiftList(string targetElement, List<string> listOfElement)
     {
-        var root = GetComponent<UIDocument>().rootVisualElement;
-        // UnityEngine.UIElements.VisualElement mainContainer = root.Q<UnityEngine.UIElements.VisualElement>("main-container");
-        UnityEngine.UIElements.Button buttonAddRecord = root.Q<UnityEngine.UIElements.Button>("AddRecButton");
-        UnityEngine.UIElements.TextField summField = root.Q<UnityEngine.UIElements.TextField>("Summ");
-        UnityEngine.UIElements.DropdownField catDropdown = root.Q<UnityEngine.UIElements.DropdownField>("CategoriesDropdown");
-
-        
-
-        if (flag)
+        List<string> answer = new List<string>();
+        int startIndex = listOfElement.IndexOf(targetElement);
+        for (int i = 0; i < listOfElement.Count; i++)
         {
-            root.visible = true;
-            //buttonAddRecord.visible = true;
-            //summField.visible = true;
-            //catDropdown.visible = true;
+            if (startIndex > 0)
+            {
+                answer.Add(listOfElement[startIndex]);
+                startIndex --;
+            }
+            else
+            {
+                answer.Add(listOfElement[startIndex]);
+                startIndex += listOfElement.Count - 1;
+            }
         }
-        else
-        {
-            root.visible = false;
-            //buttonAddRecord.visible = false;
-            //summField.visible = false;
-       
-            //catDropdown.visible = false;
-        }
+        return answer;
     }
+
+    
 }

@@ -4,6 +4,7 @@
     <Style src="project://database/Assets/Scripts/UI/USS/dropDown.uss?fileID=7433441132597879392&amp;guid=cd1af87e3184da4438a6f8b4e27debae&amp;type=3#dropDown" />
     <Style src="project://database/Assets/Scripts/UI/USS/buttonsStandart.uss?fileID=7433441132597879392&amp;guid=a7fb0fe5a06047b4c9efba47bd1514c3&amp;type=3#buttonsStandart" />
     <Style src="project://database/Assets/Scripts/UI/USS/deleteHover.uss?fileID=7433441132597879392&amp;guid=99bd6435972a4334c98cc054c5166dfd&amp;type=3#deleteHover" />
+    <Style src="project://database/Assets/Scripts/UI/USS/dateDropdown.uss?fileID=7433441132597879392&amp;guid=cb6fb91443de72c4f930aa314044181f&amp;type=3#dateDropdown" />
     <ui:VisualElement style="flex-grow: 1;">
         <ui:VisualElement name="main_container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.43); align-items: stretch;">
             <ui:VisualElement name="HeadWin" class="headWin" style="flex-grow: 1; background-color: rgb(137, 230, 137); justify-content: space-around; align-items: center; flex-direction: row;">
@@ -16,13 +17,20 @@
                         <ui:UnsignedIntegerField name="Summ" />
                     </ui:VisualElement>
                     <ui:Toggle label="Доход" name="Income" />
-                    <ui:VisualElement name="DateField" style="align-items: stretch; align-self: stretch;">
+                    <ui:VisualElement name="DateContainer" style="align-items: stretch; align-self: stretch;">
                         <ui:Label tabindex="-1" text="Дата" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DateLabel" />
-                        <ui:DropdownField name="EasyDate" class="custom-dropdown" />
+                        <ui:VisualElement name="DateFields" style="flex-grow: 1; flex-direction: row; justify-content: space-between;">
+                            <ui:DropdownField name="DayDateField" class="custom-dropdown" />
+                            <ui:DropdownField name="MonthDateField" class="custom-dropdown" />
+                            <ui:DropdownField name="YearDateField" class="custom-dropdown" />
+                        </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:VisualElement name="CategoriesField" style="align-items: stretch; align-self: stretch;">
                         <ui:Label tabindex="-1" text="Категории" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CategoriesLabel" />
-                        <ui:DropdownField name="CategoriesDropdown" class="custom-dropdown" />
+                        <ui:VisualElement name="CatFields" style="flex-grow: 1; flex-direction: row; justify-content: space-around; align-items: stretch;">
+                            <ui:DropdownField name="CategoriesDropdown" class="custom-dropdown" style="flex-grow: 2;" />
+                            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="AddCat" style="background-image: url(&quot;project://database/Assets/Scripts/UI/AddRecWindow/plus-symbol-button.png?fileID=2800000&amp;guid=72d3ccca7d2c9154e8900969e0ac24e0&amp;type=3#plus-symbol-button&quot;); -unity-background-scale-mode: scale-to-fit; border-left-color: rgba(162, 162, 162, 0); border-right-color: rgba(162, 162, 162, 0); border-top-color: rgba(162, 162, 162, 0); border-bottom-color: rgba(162, 162, 162, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-top-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; border-bottom-left-radius: 0; background-color: rgba(163, 188, 242, 0); -unity-background-image-tint-color: rgba(50, 50, 50, 0.67);" />
+                        </ui:VisualElement>
                     </ui:VisualElement>
                 </ui:VisualElement>
                 <ui:Button text="Добавить запись" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AddRecButton" style="border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; -unity-text-align: middle-center; white-space: nowrap; text-overflow: clip;" />

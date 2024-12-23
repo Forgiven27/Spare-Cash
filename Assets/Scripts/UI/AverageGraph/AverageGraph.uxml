@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/UI/USS/buttonsStandart.uss?fileID=7433441132597879392&amp;guid=a7fb0fe5a06047b4c9efba47bd1514c3&amp;type=3#buttonsStandart" />
+    <ui:VisualElement name="main_container" style="flex-grow: 1;">
+        <ui:VisualElement name="smth" style="flex-grow: 1;">
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button" />
+            <ui:VisualElement name="graphs" style="flex-grow: 1;">
+                <ui:VisualElement name="exp" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Scripts/UI/AverageGraph/photo_2024-12-23_01-13-25.jpg?fileID=2800000&amp;guid=aebde9cd769dfd54aa9da72c2df9099d&amp;type=3#photo_2024-12-23_01-13-25&quot;); -unity-background-scale-mode: scale-to-fit;" />
+                <ui:VisualElement name="noexp" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Scripts/UI/AverageGraph/photo_2024-12-23_01-13-22.jpg?fileID=2800000&amp;guid=c41954e8cae3ece46b24302d0428108c&amp;type=3#photo_2024-12-23_01-13-22&quot;); -unity-background-scale-mode: scale-to-fit;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

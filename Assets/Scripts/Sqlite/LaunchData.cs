@@ -12,28 +12,9 @@ public class LaunchData : MonoBehaviour
 
     void OnEnable()
     {
-        //DeleteTables();
-        UserInfo.UserID = 1;
-        RefillTables();
-
-        //ResetZeroUser();
-        var root = GetComponent<UIDocument>().rootVisualElement;
+        DeleteTables();
     }
-    /*
-    private void ResetZeroUser()
-    {
-        UserDB userDB = new UserDB();
-        AccountDB accountDB = new AccountDB(userDB);
-        CategoryDB categoryDB = new CategoryDB(userDB);
-        RecordDB recordDB = new RecordDB(categoryDB, accountDB, userDB);
-
-        accountDB.DeleteDataByIdUser(0);
-        categoryDB.DeleteDataByIdUser(0);
-        recordDB.DeleteDataByIdUser(0);
-
-
-    }
-    */
+    
     
     private void RefillTables()
     {
@@ -68,14 +49,14 @@ public class LaunchData : MonoBehaviour
         RecordDB recordDB = new RecordDB(categoryDB, accountDB, userDB);
         if (recordDB.CountOfRows() == 0)
         {
-            recordDB.addData(new RecordEntity(0, 100, 0, DateTime.Today.ToString("u"), 0, 0, 0));
-            recordDB.addData(new RecordEntity(1, 150, 0, DateTime.Today.ToString("u"), 1, 0, 0));
-            recordDB.addData(new RecordEntity(2, 200, 0, DateTime.Today.ToString("u"), 2, 0, 0));
-            recordDB.addData(new RecordEntity(3, 100, 0, DateTime.Today.ToString("u"), 3, 0, 0));
-            recordDB.addData(new RecordEntity(4, 150, 0, DateTime.Today.ToString("u"), 4, 0, 0));
-            recordDB.addData(new RecordEntity(5, 200, 0, DateTime.Today.ToString("u"), 5, 0, 1));
-            recordDB.addData(new RecordEntity(6, 100, 0, DateTime.Today.ToString("u"), 6, 0, 1));
-            recordDB.addData(new RecordEntity(7, 150, 0, DateTime.Today.ToString("u"), 7, 0, 1));
+            recordDB.addData(new RecordEntity(0, 100, 0, DateTime.Today.ToString("dd-MM-yyyy"), 0, 1, 1));
+            recordDB.addData(new RecordEntity(1, 150, 0, DateTime.Today.ToString("dd-MM-yyyy"), 1, 1, 1));
+            recordDB.addData(new RecordEntity(2, 200, 0, DateTime.Today.ToString("dd-MM-yyyy"), 2, 1, 1));
+            recordDB.addData(new RecordEntity(3, 100, 0, DateTime.Today.ToString("dd-MM-yyyy"), 3, 1, 1));
+            recordDB.addData(new RecordEntity(4, 150, 0, DateTime.Today.ToString("dd-MM-yyyy"), 4, 1, 1));
+            recordDB.addData(new RecordEntity(5, 200, 0, DateTime.Today.ToString("dd-MM-yyyy"), 5, 1, 1));
+            recordDB.addData(new RecordEntity(6, 100, 0, DateTime.Today.ToString("dd-MM-yyyy"), 1, 1, 1));
+            recordDB.addData(new RecordEntity(7, 150, 0, DateTime.Today.ToString("dd-MM-yyyy"), 0, 1, 1));
 
         }
         categoryDB.Close();
@@ -84,24 +65,19 @@ public class LaunchData : MonoBehaviour
 
     }
     
-    private void DeleteTables()
+    private void DeleteTables() // Ломает всё
     {
-        UserDB userDB = new UserDB();
-        AccountDB accountDB = new AccountDB(userDB);
-        CategoryDB categoryDB = new CategoryDB(userDB);
-        RecordDB recordDB = new RecordDB(categoryDB, accountDB, userDB);
+        UserDB userDB = new UserDB(1);
+        AccountDB accountDB = new AccountDB(userDB, 1);
+        CategoryDB categoryDB = new CategoryDB(userDB, 1);
+        RecordDB recordDB = new RecordDB(categoryDB, accountDB, userDB, 1);
 
-        recordDB.DeleteAllData();
-        accountDB.DeleteAllData();
-        categoryDB.DeleteAllData();
-
-
-        categoryDB.Close();
-        accountDB.Close();
-        recordDB.Close();
+        //categoryDB.Close();
+        //accountDB.Close();
+        //recordDB.Close();
 
         RefillTables();
-        SceneManager.LoadScene(0);
+        //SceneManager.LoadScene("MainScene");
     }
     
     

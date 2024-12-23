@@ -16,6 +16,12 @@ public class MainMenuList : MonoBehaviour
 
     
     List<List<string>> list_data;
+
+    UserDB userDB;
+    AccountDB accountDB;
+    CategoryDB categoryDB;
+    RecordDB recordDB;
+
     void Start()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
@@ -28,34 +34,23 @@ public class MainMenuList : MonoBehaviour
         head.style.height = Length.Percent(10);
         pieGraph.style.height = Length.Percent(40);
         floor.style.height = Length.Percent(10);
-        // Устанавливаем размеры контейнера и ListView
-        /*mainContainer.style.width = Length.Percent(100);
-        mainContainer.style.height = Length.Percent(50);
-        */
+        
         listView.style.width = Length.Percent(100);
         //listView.style.height = Length.Percent(50);
 
         // Устанавливаем скроллбар как невидимый
         listView.Q<ScrollView>().verticalScroller.style.display = DisplayStyle.None;
 
-        UserDB userDB = new UserDB();
-        AccountDB accountDB = new AccountDB(userDB);
-        CategoryDB categoryDB = new CategoryDB(userDB);
+        userDB = new UserDB();
+        accountDB = new AccountDB(userDB);
+        categoryDB = new CategoryDB(userDB);
         
-        RecordDB recordDB = new RecordDB(categoryDB, accountDB, userDB);
+        recordDB = new RecordDB(categoryDB, accountDB, userDB);
 
 
         list_data = new List<List<string>>();
 
-        UpdateListData();/*
-        foreach (var item in list_data)
-        {
-            foreach (var s in item)
-            {
-                Debug.Log(s);   
-            }
-        }
-        */
+        UpdateListData();
         // Создаем список данных для ListView
         var data = new[]
         {
@@ -189,17 +184,19 @@ public class MainMenuList : MonoBehaviour
     }
     public void UpdateListData()
     {
+        /*
         UserDB userDB = new UserDB();
         AccountDB accountDB = new AccountDB(userDB);
         CategoryDB categoryDB = new CategoryDB(userDB);
         
         RecordDB recordDB = new RecordDB(categoryDB, accountDB, userDB);
+        */
         list_data.Clear();
-        List<List<string>> cat_list = categoryDB.GetCategoryData();
+        List<List<string>> cat_list = categoryDB.GetUserCategoryData(UserInfo.UserID);
         for (int i = 0; cat_list.Count > i; i++)
         {
             string percent;
-            int accId = 0;
+            int accId = 1;
             float summ = recordDB.GetSummAccount(accId, 0, UserInfo.UserID);
             float catSum = recordDB.GetSummCategory(i, accId, 0, UserInfo.UserID);
             if (summ > 0 && catSum > 0)
@@ -221,6 +218,13 @@ public class MainMenuList : MonoBehaviour
             list_data.Add(list_temp);
         }
 
+    }
+    private void OnDestroy()
+    {
+        recordDB.Close();
+        accountDB.Close();
+        categoryDB.Close();
+        userDB.Close();
     }
 
 }

@@ -1,0 +1,13 @@
+.unity-base-popup-field__arrow{
+	display:none;
+}
+.unity-base-popup-field__input{
+	border-width:0px;
+}
+.unity-scroller{
+	background-color:black;
+	/*display:none;*/
+}
+.unity-scroller--vertical{
+	background-color:red;
+}

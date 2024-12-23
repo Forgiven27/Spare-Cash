@@ -39,6 +39,21 @@ public class CategoryDB : SqliteHelper
                 ") ;";
             dbcmd.ExecuteNonQuery();
         }
+        public CategoryDB(UserDB table_user, int i) : base()
+        {
+            IDbCommand dbcmd = GetDbCommand();
+            string drop_table = "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
+            dbcmd.CommandText = drop_table +
+                "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ( " +
+                KEY_ID + " INTEGER UNIQUE PRIMARY KEY , " +
+                KEY_NAME + " TEXT, " +
+                KEY_COLOR + " TEXT," +
+                KEY_ID_USER + " INTEGER , " +
+                "FOREIGN KEY(" + KEY_ID_USER +
+                ") REFERENCES " + table_user.Table_Name + "(id)" +
+                ") ;";
+            dbcmd.ExecuteNonQuery();
+        }
 
 
         public void addData(EntityCategory description)
@@ -87,7 +102,7 @@ public class CategoryDB : SqliteHelper
             }
             return obj.ToString();
         }
-        public List<List<string>> GetCategoryData()
+        public List<List<string>> GetAllCategoryData()
         {
             List<List<string>> data = new List<List<String>>();
             IDataReader reader = null;
@@ -95,16 +110,33 @@ public class CategoryDB : SqliteHelper
             while (reader.Read()) 
             {
                 List<string> row = new List<string>();
-                Debug.Log("ID " + reader.GetInt32(0).ToString());
-                Debug.Log("NAME " + reader.GetString(1));
-                Debug.Log("COLOR " + reader.GetString(2));
-                Debug.Log("ID_USER " + reader.GetInt32(3).ToString());
+                
 
                 row.Add(reader.GetInt32(0).ToString());
                 row.Add(reader.GetString(1));
                 row.Add(reader.GetString(2));
                 row.Add(reader.GetInt32(3).ToString());
                 data.Add(row);
+            }
+            return data;
+        }
+        public List<List<string>> GetUserCategoryData(int userId)
+        {
+            List<List<string>> data = new List<List<String>>();
+            IDataReader reader = null;
+            reader = GetAllData();
+            while (reader.Read())
+            {
+                
+                if (reader.GetInt32(3) == userId)
+                {
+                    List<string> row = new List<string>();
+                    row.Add(reader.GetInt32(0).ToString());
+                    row.Add(reader.GetString(1));
+                    row.Add(reader.GetString(2));
+                    row.Add(reader.GetInt32(3).ToString());
+                    data.Add(row);
+                }
             }
             return data;
         }

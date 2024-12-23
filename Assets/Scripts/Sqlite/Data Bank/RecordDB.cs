@@ -45,6 +45,28 @@ public class RecordDB : SqliteHelper
             dbcmd.ExecuteNonQuery();
         }
 
+        public RecordDB(CategoryDB table_cat, AccountDB table_acc, UserDB table_user, int i) : base()
+        {
+            IDbCommand dbcmd = GetDbCommand();
+            string drop_table = "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
+            dbcmd.CommandText = drop_table +
+                " CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ( " +
+                KEY_ID + " INTEGER UNIQUE PRIMARY KEY , " +
+                KEY_SUMMA + " INTEGER , " +
+                KEY_INCOME + " INTEGER , " +
+                KEY_DATE + "  TEXT , " +
+                KEY_ID_CAT + "  INTEGER , " +
+                KEY_ID_ACC + "  INTEGER , " +
+                KEY_ID_USER + "  INTEGER , " +
+                "FOREIGN KEY(" + KEY_ID_CAT +
+                ") REFERENCES " + table_cat.Table_Name + "(id)  , " +
+                "FOREIGN KEY(" + KEY_ID_ACC +
+                ") REFERENCES " + table_acc.Table_Name + "(id)  , " +
+                "FOREIGN KEY(" + KEY_ID_USER +
+                ") REFERENCES " + table_user.Table_Name + "(id) ) ;";
+            dbcmd.ExecuteNonQuery();
+        }
+
 
         public void addData(RecordEntity description)
         {
@@ -169,7 +191,7 @@ public class RecordDB : SqliteHelper
             return base.CountOfRows(TABLE_NAME);
         }
 
-        public List<List<string>> GetRecordData()
+        public List<List<string>> GetAllRecordData()
         {
             List<List<string>> data = new List<List<String>>();
             IDataReader reader = null;
@@ -185,6 +207,28 @@ public class RecordDB : SqliteHelper
                 row.Add(reader.GetInt32(4).ToString());
                 row.Add(reader.GetInt32(5).ToString());
                 data.Add(row);
+            }
+            return data;
+        }
+        public List<List<string>> GetUserRecordData(int userId)
+        {
+            List<List<string>> data = new List<List<String>>();
+            IDataReader reader = null;
+            reader = GetAllData();
+            while (reader.Read())
+            {
+                if (reader.GetInt32(5) == userId)
+                {
+                    List<string> row = new List<string>();
+
+                    row.Add(reader.GetInt32(0).ToString());
+                    row.Add(reader.GetInt32(1).ToString());
+                    row.Add(reader.GetInt32(2).ToString());
+                    row.Add(reader.GetString(3));
+                    row.Add(reader.GetInt32(4).ToString());
+                    row.Add(reader.GetInt32(5).ToString());
+                    data.Add(row);
+                }
             }
             return data;
         }

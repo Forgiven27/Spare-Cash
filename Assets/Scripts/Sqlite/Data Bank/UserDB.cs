@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace DataBank{ 
@@ -28,11 +29,50 @@ public class UserDB: SqliteHelper
             // string drop_table = "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
             dbcmd.CommandText = " CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ( " +
                 KEY_ID + " INTEGER UNIQUE PRIMARY KEY , " +
-                KEY_LOGIN + " TEXT ," +
+                KEY_LOGIN + " TEXT UNIQUE ," +
                 KEY_PASSWORD + " TEXT ," +
                 KEY_TYPE_OF_USER + " TEXT" +
                 " );";
             dbcmd.ExecuteNonQuery();
+        }
+        public UserDB(int i) : base()
+        {
+            IDbCommand dbcmd = GetDbCommand();
+            string drop_table = "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
+            dbcmd.CommandText = drop_table + " CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ( " +
+                KEY_ID + " INTEGER UNIQUE PRIMARY KEY , " +
+                KEY_LOGIN + " TEXT UNIQUE ," +
+                KEY_PASSWORD + " TEXT ," +
+                KEY_TYPE_OF_USER + " TEXT" +
+                " );";
+            dbcmd.ExecuteNonQuery();
+        }
+
+        public int IsUser(string login, string password)
+        {
+                IDbCommand dbcmd = GetDbCommand();
+            dbcmd.CommandText = "SELECT " + KEY_ID +
+                " FROM "+ TABLE_NAME +
+                " WHERE " + KEY_LOGIN +
+                " = '" + login +
+                "' AND " + KEY_PASSWORD +
+                " = '" + password + "' ;";
+            IDataReader data = dbcmd.ExecuteReader();
+            if (data == null)
+            {
+                return -1;
+            }
+            else
+            {
+                int a = -1;
+                while (data.Read())
+                {
+                    a = data.GetInt32(0);
+                }
+                return a;
+            }
+            
+
         }
 
 

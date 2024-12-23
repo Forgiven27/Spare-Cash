@@ -1,0 +1,19 @@
+.unity-base-popup-field__text{
+	color: black;
+}
+.unity-base-popup-field__label{
+	margin-left: 10px;
+}
+.unity-base-popup-field{
+	border-width:1.5px;
+	border-radius:10px;
+	border-color: rgb(36,110,195);
+	background-color: rgb(223,250,233);
+}
+.unity-base-popup-field__input{
+	margin-left:0px;
+	margin-right:0px;
+	border-width:0px;
+	border-bottom-right-radius:7px;
+	border-bottom-left-radius:7px;
+}

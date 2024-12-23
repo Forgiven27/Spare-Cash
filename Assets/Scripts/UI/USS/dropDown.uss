@@ -26,12 +26,12 @@
 .custom-dropdown__popup .unity-base-popup-field__list-view .unity-base-popup-field__list-item:checked {
     background-color: #3E8E41; 
     color: red; 
-}
-/*
-.unity-base-popup-field  {
+}   
+
+.unity-base-popup-field_text{
     background-color: #000000;
     color: red; 
-}*/
+}
 /*
 .unity-popup-field  {
     background-color: #ffffff;

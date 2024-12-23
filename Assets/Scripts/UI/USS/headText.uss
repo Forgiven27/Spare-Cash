@@ -1,0 +1,4 @@
+.head-text{
+	/*font-size:calc(12px + 8 * (100vw - 320px) / 880);*/
+	font-size: 100%;
+}

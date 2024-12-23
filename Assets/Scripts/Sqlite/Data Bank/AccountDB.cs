@@ -35,6 +35,19 @@ public class AccountDB : SqliteHelper
                 ") ;";
             dbcmd.ExecuteNonQuery();
         }
+        public AccountDB(UserDB table_user, int i) : base()
+        {
+            IDbCommand dbcmd = GetDbCommand();
+            string drop_table = "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
+            dbcmd.CommandText = drop_table + "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ( " +
+                KEY_ID + " INTEGER UNIQUE PRIMARY KEY , " +
+                KEY_ID_USER + " INTEGER," +
+                KEY_NAME + " TEXT," +
+                "FOREIGN KEY(" + KEY_ID_USER +
+                ") REFERENCES " + table_user.Table_Name + "(id)" +
+                ") ;";
+            dbcmd.ExecuteNonQuery();
+        }
 
 
         public void addData(AccountEntity description)
@@ -74,7 +87,7 @@ public class AccountDB : SqliteHelper
             return dbcmd.ExecuteReader();
         }
 
-        public List<List<string>> GetAccountData()
+        public List<List<string>> GetAllAccountData()
         {
             List<List<string>> data = new List<List<String>>();
             IDataReader reader = null;
@@ -88,6 +101,24 @@ public class AccountDB : SqliteHelper
                 row.Add(reader.GetString(2));
                 
                 data.Add(row);
+            }
+            return data;
+        }
+        public List<List<string>> GetUserAccountData(int userId)
+        {
+            List<List<string>> data = new List<List<String>>();
+            IDataReader reader = null;
+            reader = GetAllData();
+            while (reader.Read())
+            {
+                if (reader.GetInt32(1) == userId)
+                {
+                    List<string> row = new List<string>();
+                    row.Add(reader.GetInt32(0).ToString());
+                    row.Add(reader.GetInt32(1).ToString());
+                    row.Add(reader.GetString(2));
+                    data.Add(row);
+                }
             }
             return data;
         }
